@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 class Navbar extends Component {
   render() {
     return (
-      <Router>
         <nav className="nav">
           <div className="left-div">
             <Link to="/">
@@ -65,7 +64,6 @@ class Navbar extends Component {
             </div>
           </div>
         </nav>
-      </Router>
     );
   }
 }

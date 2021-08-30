@@ -2,15 +2,13 @@ import React from 'react';
 // connect to store.
 import { fetchpost } from '../actions/post';
 import { connect } from 'react-redux';
-import { PostList, Navbar } from './';
 import propTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import Temp from './Temp';
+import { Navbar, Home, Page404, Login, Signup } from './';
 
-const Login = () => <div>Login</div>;
 
-const Signup = () => <div>Signup</div>;
-const Home = () => <div>Signup</div>;
+
+
 
 class App extends React.Component {
   componentDidMount() {
@@ -21,37 +19,24 @@ class App extends React.Component {
     // console.log('this.props.posts', this.props);
     const { posts } = this.props;
     return (
-      <div>
-        <Router>
+      <Router>
+        <div>
           <Navbar />
-            <ul>
-              <li>
-                <Link to="/login">Log in</Link>
-              </li>
-              <li>
-                <Link to="/logout">Log out</Link>
-              </li>
-              <li>
-                <Link to="/signup">Register</Link>
-              </li>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-            </ul>
-          <Route path="/" exact>
-            <PostList posts={posts} />
-          </Route>
-          <Route path="/home" exact>
-            <Temp />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/home">
-            <Signup />
-          </Route>
-        </Router>
-      </div>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(props) => {
+                // this is how we pass props in route.
+                return <Home posts={posts} {...props} />;
+              }}
+            ></Route>
+            <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/signup" component={Signup}></Route>
+            <Route  component={Page404}></Route>
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
