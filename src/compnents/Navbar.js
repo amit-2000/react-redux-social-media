@@ -1,24 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 class Navbar extends Component {
   render() {
     return (
-      <div>
+      <Router>
         <nav className="nav">
-          <div className="left-nav">
-            <img src="" alt="logo" />
+          <div className="left-div">
+            <Link to="/">
+              <img
+                src="https://ninjasfiles.s3.amazonaws.com/0000000000003454.png"
+                alt="logo"
+              />
+            </Link>
           </div>
           <div className="search-container">
-            <input type="text" placeholder="search" />
+            <img
+              className="search-icon"
+              src="https://image.flaticon.com/icons/svg/483/483356.svg"
+              alt="search-icon"
+            />
+            <input placeholder="Search" />
+
             <div className="search-results">
               <ul>
                 <li className="search-results-row">
-                  <img src="" alt="avatar" />
+                  <img
+                    src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                    alt="user-dp"
+                  />
                   <span>John Doe</span>
                 </li>
                 <li className="search-results-row">
-                  <img src="" alt="avatar" />
+                  <img
+                    src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                    alt="user-dp"
+                  />
                   <span>John Doe</span>
                 </li>
               </ul>
@@ -26,19 +43,29 @@ class Navbar extends Component {
           </div>
           <div className="right-nav">
             <div className="user">
-              <img src="" alt="user" />
-              <span>Jenny..</span>
+              <img
+                src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                alt="user-dp"
+                id="user-dp"
+              />
+              <span>John Doe</span>
             </div>
             <div className="nav-links">
               <ul>
-                <li>log in</li>
-                <li>log out</li>
-                <li>Register</li>
+                <li>
+                  <Link to="/login">Log in</Link>
+                </li>
+                <li>
+                  <Link to="/logout">Log out</Link>
+                </li>
+                <li>
+                  <Link to="/signup">Register</Link>
+                </li>
               </ul>
             </div>
           </div>
         </nav>
-      </div>
+      </Router>
     );
   }
 }
