@@ -6,7 +6,6 @@ import propTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { Navbar, Home, Page404, Login, Signup } from './';
 
-
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchpost());
@@ -30,7 +29,7 @@ class App extends React.Component {
             ></Route>
             <Route exact path="/login" component={Login}></Route>
             <Route exact path="/signup" component={Signup}></Route>
-            <Route  component={Page404}></Route>
+            <Route component={Page404}></Route>
           </Switch>
         </div>
       </Router>
@@ -38,9 +37,9 @@ class App extends React.Component {
   }
 }
 
-function mapstateToProps(state) {
+function mapstateToProps({ posts }) {
   return {
-    posts: state.posts,
+    posts: posts,
   };
 }
 App.propTypes = {

@@ -3,22 +3,21 @@ import React, { Component } from 'react';
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      email: '',
+      password: '',
+    };
 
-    this.emailInputRef = React.createRef();
-    this.passwordInputRef = React.createRef();
   }
   handleLogInClick = (e) => {
     e.preventDefault();
-    console.log(
-      'this.emailInputRef',
-      this.emailInputRef.current.value,
-      'this.passwordInputRef',
-      this.passwordInputRef.current.value
-    );
+    console.log(this.state.email, this.state.password);
+   
   };
-
+  
   render() {
     //   uncontroller comp : comp data is not manage my react itself.
+    // controlled components using state.
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>
@@ -27,7 +26,8 @@ class Login extends Component {
             type="email"
             placeholder="Email"
             required
-            ref={this.emailInputRef}
+            // ref={this.emailInputRef}
+            onChange={(e) => this.setState({ email: e.target.value })}
           />
         </div>
         <div className="field">
@@ -35,7 +35,9 @@ class Login extends Component {
             type="password"
             placeholder="password"
             required
-            ref={this.passwordInputRef}
+            // ref={this.passwordInputRef}
+            // onChange={this.handlePasschange}
+            onChange={(e) => this.setState({ password: e.target.value })}
           />
         </div>
         <div className="field">
