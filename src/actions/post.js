@@ -1,9 +1,11 @@
-import { url } from '../helper/urls';
+import { APIUrls } from '../helper/urls';
 import { UPDATE_POST } from './actionsTypes';
 
 export function fetchpost() {
   return (dispatch) => {
     // console.log(url);
+    const url = APIUrls.getPost();
+    console.log(url);
     fetch(url).then((res) => {
       return res
         .json()

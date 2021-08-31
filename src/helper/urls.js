@@ -1,6 +1,8 @@
-export const url =
-  'http://codeial.codingninjas.com:8000/api/v2/posts?page=1&limit=5';
+export const API_ROOT = 'http://codeial.codingninjas.com:8000/api/v2';
 
-export const fetchpost = () => {
-  return url;
+export const APIUrls = {
+  getPost: (page = 1, limit = 10) =>
+    `${API_ROOT}/posts?page=${page}&limit=${limit}`,
+  login: () => `${API_ROOT}/users/login`,
+  signUp: () => `${API_ROOT}/users/signup`,
 };
