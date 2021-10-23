@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { login } from '../actions/auth';
+import auth from '../reducers/auth';
 
 class Login extends Component {
   constructor(props) {
@@ -7,14 +10,18 @@ class Login extends Component {
       email: '',
       password: '',
     };
-
   }
   handleLogInClick = (e) => {
     e.preventDefault();
+    const email = this.state.email;
+    const password = this.state.password;
+    console.log('this.props are', this.props);
+    if (email.length>1 && password.length>1) {
+      this.props.dispatch(login(email, password));
+    }
     console.log(this.state.email, this.state.password);
-   
   };
-  
+
   render() {
     //   uncontroller comp : comp data is not manage my react itself.
     // controlled components using state.
@@ -48,4 +55,10 @@ class Login extends Component {
     );
   }
 }
-export default Login;
+function mapstateToProps({ auth }) {
+  return {
+    user: auth.user,
+  };
+}
+
+export default connect(mapstateToProps)(Login);
