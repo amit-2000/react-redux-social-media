@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 class Navbar extends Component {
   render() {
-    const { isLoggedin } = this.props;
-    console.log('isLoggedin', isLoggedin);
+    const { isLoggedin, user } = this.props;
+    console.log('user.name', user.name);
+    // console.log('isLoggedin', isLoggedin);
     return (
       <nav className="nav">
         <div className="left-div">
@@ -49,7 +50,7 @@ class Navbar extends Component {
               alt="user-dp"
               id="user-dp"
             />
-            <span>John Doe</span>
+            <span>{user.name}</span>
           </div>
           <div className="nav-links">
             <ul>

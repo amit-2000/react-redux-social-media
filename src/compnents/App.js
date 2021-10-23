@@ -5,10 +5,21 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navbar, Home, Page404, Login, Signup } from './';
-
+// import * as jwtDecode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
+import { persistUser } from '../actions/auth';
 class App extends React.Component {
   componentDidMount() {
     this.props.dispatch(fetchpost());
+    // localStorage.removeItem('token');
+    const token = localStorage.getItem('token');
+    // console.log(token);
+    console.log('user token', token);
+    if (token) {
+      const user = jwt_decode(token);
+      console.log('user', user);
+      this.props.dispatch(persistUser(user));
+    }
   }
 
   render() {

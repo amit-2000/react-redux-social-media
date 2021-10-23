@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { signup, startSingup } from '../actions/auth';
-
+import Alert from '@mui/material/Alert';
 class Signup extends Component {
   constructor() {
     super();
@@ -19,28 +20,30 @@ class Signup extends Component {
   };
 
   handleSubmit = (e) => {
+    // console.log('In handle submit');
     e.preventDefault();
     const { email, password, confirmPassword, name } = this.state;
 
     if (email && password && confirmPassword && name) {
-       this.props.dispatch(startSingup());
-       this.props.dispatch(signup(email, password, confirmPassword, name));
+      this.props.dispatch(startSingup());
+      this.props.dispatch(signup(email, password, confirmPassword, name));
     }
   };
-
   render() {
+    const { error, inProgress } = this.props.auth;
     return (
       <form className="login-form">
         <span className="login-signup-header" style={{ letterSpacing: 1 }}>
           Sign up
         </span>
+        <Alert severity="success">amit55@gmail.com</Alert>
+        {error ? <Alert severity="warning">{error}</Alert> : ''}
         <div className="field">
           <input
             type="text"
             placeholder="Name"
             required
             onChange={(e) => {
-
               this.handleInputChange('name', e.target.value);
               // this.setState({ name: e.target.value });
             }}
@@ -52,7 +55,7 @@ class Signup extends Component {
             placeholder="Email"
             required
             onChange={(e) => {
-               this.handleInputChange('email', e.target.value);
+              this.handleInputChange('email', e.target.value);
               // this.setState({ email: e.target.value });
             }}
           />
@@ -63,7 +66,7 @@ class Signup extends Component {
             placeholder="password"
             required
             onChange={(e) => {
-               this.handleInputChange('password', e.target.value);
+              this.handleInputChange('password', e.target.value);
               // this.setState({ password: e.target.value });
             }}
           />
@@ -74,18 +77,28 @@ class Signup extends Component {
             placeholder="confirm password"
             required
             onChange={(e) => {
-               this.handleInputChange('confirmPassword', e.target.value);
+              this.handleInputChange('confirmPassword', e.target.value);
             }}
           />
         </div>
         <div className="field">
-          <button>
-            <span style={{ letterSpacing: 1.5 }}>Sign up</span>{' '}
-          </button>
+          {inProgress ? (
+            <button onClick={this.handleSubmit} disabled={inProgress}>
+              signing in...
+            </button>
+          ) : (
+            <button onClick={this.handleSubmit} disabled={inProgress}>
+              sign in
+            </button>
+          )}
         </div>
-        <div className="field"></div>
       </form>
     );
   }
 }
-export default Signup;
+function mapStateToProps({ auth }) {
+  return {
+    auth: auth,
+  };
+}
+export default connect(mapStateToProps)(Signup);

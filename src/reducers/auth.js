@@ -7,7 +7,8 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
-  CLEAR_AUTH_STATE,
+  PERSIST_USER,
+  // CLEAR_AUTH_STATE,
 } from '../actions/actionsTypes';
 
 const initialState = {
@@ -53,6 +54,11 @@ export default function auth(state = initialState, action) {
         ...state,
         user: {},
         isLoggedin: false,
+      };
+    case PERSIST_USER:
+      return {
+        ...state,
+        user: action.user,
       };
     default:
       return state;

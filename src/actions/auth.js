@@ -9,7 +9,8 @@ import {
   SIGNUP_START,
   SIGNUP_FAILED,
   SIGNUP_SUCCESS,
-//   CLEAR_AUTH_STATE,
+  PERSIST_USER,
+  //   CLEAR_AUTH_STATE,
 } from './actionsTypes';
 
 export function startLogin() {
@@ -20,8 +21,8 @@ export function startLogin() {
 
 export function login(email, password) {
   const url = APIUrls.login();
-  startLogin();
   return (dispatch) => {
+    dispatch(startLogin());
     fetch(url, {
       method: 'POST',
       // sending data in urls header.
@@ -34,9 +35,16 @@ export function login(email, password) {
         return res.json();
       })
       .then((data) => {
-        dispatch(loginSucccess());
-        console.log(data);
-        return;
+        if (data.success) {
+          localStorage.setItem('token', data.data.token); //got token and store it in localstorage so everytime we refresh it stay in browser ||
+          // console.log('token', data);
+          dispatch(loginSucccess(data.data.user));
+          return;
+        } else {
+          // console.log('data', data.message);
+          dispatch(loginFail(data.message));
+          return;
+        }
       })
       .catch((err) => {
         dispatch(loginFail(err.message));
@@ -45,9 +53,10 @@ export function login(email, password) {
       });
   };
 }
-export function loginSucccess() {
+export function loginSucccess(user) {
   return {
     type: LOGIN_SUCCESS,
+    user,
   };
 }
 
@@ -73,6 +82,8 @@ export function logoutUser() {
 }
 
 export function signup(email, password, confirmPassword, name) {
+  // console.log('hellooooo');
+
   return (dispatch) => {
     const url = APIUrls.signUp();
     fetch(url, {
@@ -92,6 +103,7 @@ export function signup(email, password, confirmPassword, name) {
         console.log('data', data);
         if (data.success) {
           // do something
+
           localStorage.setItem('token', data.data.token);
           dispatch(signupSuccessful(data.data.user));
           return;
@@ -117,6 +129,14 @@ export function signupFailed(error) {
 export function signupSuccessful(user) {
   return {
     type: SIGNUP_SUCCESS,
+    user,
+  };
+}
+
+
+export function persistUser(user) {
+  return {
+    type: PERSIST_USER,
     user,
   };
 }
