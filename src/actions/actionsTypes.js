@@ -13,5 +13,6 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILED = 'SIGNUP_FAILED';
 export const CLEAR_AUTH_STATE = 'CLEAR_AUTH_STATE';
 // persist user
-
 export const PERSIST_USER = 'PERSIST_USER';
+// logout user
+export const LOGOUT_USER = 'LOGOUT_USER';

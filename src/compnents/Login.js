@@ -29,7 +29,7 @@ class Login extends Component {
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>
-        {error && <div className="alert error-dailog">{error}</div>}
+        {/* {error && <div className="alert error-dailog">{error}</div>} */}
         {error ? <Alert severity="warning">{error}</Alert> : ''}
         <div className="field">
           <input

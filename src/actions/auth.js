@@ -10,6 +10,7 @@ import {
   SIGNUP_FAILED,
   SIGNUP_SUCCESS,
   PERSIST_USER,
+  LOGOUT_USER,
   //   CLEAR_AUTH_STATE,
 } from './actionsTypes';
 
@@ -75,11 +76,6 @@ export function authenticateUser(user) {
   };
 }
 
-export function logoutUser() {
-  return {
-    type: LOG_OUT,
-  };
-}
 
 export function signup(email, password, confirmPassword, name) {
   // console.log('hellooooo');
@@ -133,10 +129,25 @@ export function signupSuccessful(user) {
   };
 }
 
-
+//persisting user
 export function persistUser(user) {
   return {
     type: PERSIST_USER,
     user,
+  };
+}
+
+// export function logoutUser(userToken) {
+//   return (dispatch) => {
+//     localStorage.removeItem(userToken);
+//     dispatch(logout());
+//     return;
+//   };
+// }
+
+// logout user
+export function logout() {
+  return {
+    type: LOGOUT_USER,
   };
 }

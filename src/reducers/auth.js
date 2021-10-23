@@ -3,11 +3,11 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   AUTHENTICATE_USER,
-  LOG_OUT,
   SIGNUP_START,
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
   PERSIST_USER,
+  LOGOUT_USER,
   // CLEAR_AUTH_STATE,
 } from '../actions/actionsTypes';
 
@@ -49,16 +49,18 @@ export default function auth(state = initialState, action) {
         user: action.user,
         isLoggedin: true,
       };
-    case LOG_OUT:
-      return {
-        ...state,
-        user: {},
-        isLoggedin: false,
-      };
+
     case PERSIST_USER:
       return {
         ...state,
         user: action.user,
+        isLoggedin: true,
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        isLoggedin: false,
+        user: {},
       };
     default:
       return state;

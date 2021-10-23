@@ -17,8 +17,15 @@ class App extends React.Component {
     console.log('user token', token);
     if (token) {
       const user = jwt_decode(token);
-      console.log('user', user);
-      this.props.dispatch(persistUser(user));
+      // console.log('user', user);
+      this.props.dispatch(
+        persistUser({
+          email: user.email,
+          password: user.password,
+          name: user.name,
+          _id: user._id,
+        })
+      );
     }
   }
 
