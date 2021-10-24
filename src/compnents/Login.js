@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login } from '../actions/auth';
+import { clearAuthState, login } from '../actions/auth';
 import Alert from '@mui/material/Alert';
+import { Redirect } from 'react-router';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,10 @@ class Login extends Component {
       password: '',
     };
   }
+  componentWillUnmount() {
+    this.props.dispatch(clearAuthState());
+  }
+
   handleLogInClick = (e) => {
     e.preventDefault();
     const email = this.state.email;
@@ -24,13 +29,16 @@ class Login extends Component {
   render() {
     //   uncontroller comp : comp data is not manage my react itself.
     // controlled components using state.
-    const { inProgress, error } = this.props.auth;
+    const { inProgress, error, isLoggedin } = this.props.auth;
     // console.log(is)
+    if (isLoggedin) {
+      return <Redirect to="/" />;
+    }
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>
         {/* {error && <div className="alert error-dailog">{error}</div>} */}
-        {error ? <Alert severity="warning">{error}</Alert> : ''}
+        {error ? <Alert severity="error">{error}</Alert> : ''}
         <div className="field">
           <input
             type="email"

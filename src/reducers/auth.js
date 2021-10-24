@@ -8,6 +8,8 @@ import {
   SIGNUP_FAILED,
   PERSIST_USER,
   LOGOUT_USER,
+  CLEAR_AUTH_STATE,
+
   // CLEAR_AUTH_STATE,
 } from '../actions/actionsTypes';
 
@@ -61,6 +63,11 @@ export default function auth(state = initialState, action) {
         ...state,
         isLoggedin: false,
         user: {},
+      };
+    case CLEAR_AUTH_STATE:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;

@@ -10,6 +10,7 @@ import {
   SIGNUP_SUCCESS,
   PERSIST_USER,
   LOGOUT_USER,
+  CLEAR_AUTH_STATE,
   //   CLEAR_AUTH_STATE,
 } from './actionsTypes';
 
@@ -74,7 +75,6 @@ export function authenticateUser(user) {
     user,
   };
 }
-
 
 export function signup(email, password, confirmPassword, name) {
   // console.log('hellooooo');
@@ -148,5 +148,12 @@ export function persistUser(user) {
 export function logout() {
   return {
     type: LOGOUT_USER,
+  };
+}
+// Clear Auth state.
+
+export function clearAuthState() {
+  return {
+    type: CLEAR_AUTH_STATE,
   };
 }
