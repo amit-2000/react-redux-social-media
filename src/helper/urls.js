@@ -5,4 +5,7 @@ export const APIUrls = {
     `${API_ROOT}/posts?page=${page}&limit=${limit}`,
   login: () => `${API_ROOT}/users/login`,
   signUp: () => `${API_ROOT}/users/signup`,
+  editProfile: () => `${API_ROOT}/users/edit`,
+  userProile: (userId) => `${API_ROOT}/users/${userId}`,
+  userFriends: () => `${API_ROOT}/friendship/fetch_user_friends`,
 };

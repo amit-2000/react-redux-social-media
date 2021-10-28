@@ -26,7 +26,7 @@ class Signup extends Component {
   handleSubmit = (e) => {
     // console.log('In handle submit');
     e.preventDefault();
-    const { email, password, confirmPassword, name, isLoggedin } = this.state;
+    const { email, password, confirmPassword, name } = this.state;
 
     if (email && password && confirmPassword && name) {
       this.props.dispatch(startSingup());

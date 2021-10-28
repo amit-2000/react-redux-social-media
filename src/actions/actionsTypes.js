@@ -16,3 +16,17 @@ export const CLEAR_AUTH_STATE = 'CLEAR_AUTH_STATE';
 export const PERSIST_USER = 'PERSIST_USER';
 // logout user
 export const LOGOUT_USER = 'LOGOUT_USER';
+// Profile settings
+
+export const EDIT_USER_SUCCESSFUL = 'EDIT_USER_SUCCESSFUL';
+export const EDIT_USER_FAIL = 'EDIT_USER_FAIL';
+
+//Fetch other user profile
+export const USER_PROFILE_SUCCESS = 'USER_PROFILE_SUCCESS';
+export const USER_PROFILE_FAILURE = 'USER_PROFILE_FAILURE';
+export const FETCH_USER_PROFILE = 'FETCH_USER_PROFILE';
+
+// Fetch friends  action
+export const FETCH_FRIEND_SUCCESSFUL = 'FETCH_FRIEND_SUCCESSFUL';
+export const FETCH_FRIEND_FAIL = 'FETCH_FRIEND_FAIL';
+

@@ -1,5 +1,6 @@
 import React from 'react';
 import proTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 class PostList extends React.Component {
   render() {
     // console.log('this.props.posts', this.props);
@@ -11,10 +12,12 @@ class PostList extends React.Component {
             <div className="post-wrapper" key={idx}>
               <div className="post-header">
                 <div className="post-avatar">
-                  <img
-                    src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                    alt="user-pic"
-                  />
+                  <Link to={`user/${item.user._id}`}>
+                    <img
+                      src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                      alt="user-pic"
+                    />
+                  </Link>
                   <div>
                     {' '}
                     <span className="post-auther">{item.user.name}</span>

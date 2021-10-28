@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { PostList } from './';
+import FriendList from './FriendList';
 class Home extends Component {
   render() {
     const { posts } = this.props;
@@ -8,6 +9,7 @@ class Home extends Component {
     return (
       <div className="home">
         <PostList posts={posts} />
+        <FriendList friends={this.props.friends} />
       </div>
     );
   }

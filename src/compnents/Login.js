@@ -30,14 +30,16 @@ class Login extends Component {
     //   uncontroller comp : comp data is not manage my react itself.
     // controlled components using state.
     const { inProgress, error, isLoggedin } = this.props.auth;
-    // console.log(is)
+    console.log(this.props);
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
+    console.log(from);
     if (isLoggedin) {
-      return <Redirect to="/" />;
+      // 'to' can also accept an object !
+      return <Redirect to={from.pathname} />;
     }
     return (
       <form className="login-form">
         <span className="login-signup-header">Log In</span>
-        {/* {error && <div className="alert error-dailog">{error}</div>} */}
         {error ? <Alert severity="error">{error}</Alert> : ''}
         <div className="field">
           <input
@@ -74,6 +76,7 @@ class Login extends Component {
     );
   }
 }
+
 function mapstateToProps(state) {
   return {
     auth: state.auth,
