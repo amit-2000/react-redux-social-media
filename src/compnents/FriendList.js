@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import FriendListItem from './FriendListItem';
 
 const FriendList = (props) => {
+  console.log(props.firends);
   return (
     <div className="friends-list">
       <div className="header">Friends </div>
@@ -16,7 +17,6 @@ const FriendList = (props) => {
     </div>
   );
 };
-
 
 function mapStateToProps({ friends }) {
   return {

@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserProfile } from '../actions/profile';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Alert } from '@mui/material';
+import { APIUrls } from '../helper/urls';
+import { getToken } from '../helper/utils';
+import { AddFriendSuccess } from '../actions/friends';
 class UserProfile extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      success: null,
+      error: null,
+    };
+  }
+
   componentDidMount() {
     const { match } = this.props;
 
@@ -12,7 +24,7 @@ class UserProfile extends Component {
     }
   }
   chechIfUserIsFriend = () => {
-    console.log('this.props', this.props);
+    // console.log('this.props', this.props);
     const { match, friends } = this.props;
     const userId = match.params.userId;
 
@@ -25,8 +37,38 @@ class UserProfile extends Component {
     return false;
   };
 
+  handleAddFriend = async () => {
+    const userId = this.props.match.params.userId;
+    const url = APIUrls.addFriend(userId);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getToken()}`,
+      },
+    };
+
+    const response = await fetch(url, options);
+    const data = await response.json();
+    console.log('data', data);
+
+    if (data.success) {
+      console.log(data);
+      this.setState({
+        success: true,
+      });
+      this.props.dispatch(AddFriendSuccess(data.data.friendship));
+    } else {
+      this.setState({
+        success: null,
+        error: data.message,
+      });
+    }
+  };
+
   render() {
-    console.log(this.props.friend);
+    console.log('this.props.friend', this.props.friend);
     const { user, inProgress } = this.props.profile;
     if (inProgress) {
       return (
@@ -36,6 +78,7 @@ class UserProfile extends Component {
       );
     }
     const isUserIsFriend = this.chechIfUserIsFriend();
+    const { success, error } = this.state;
     return (
       <div className="settings">
         <div className="img-container">
@@ -57,10 +100,14 @@ class UserProfile extends Component {
 
         <div className="btn-grp">
           {!isUserIsFriend ? (
-            <button className="button save-btn">Add Friend</button>
+            <button className="button save-btn" onClick={this.handleAddFriend}>
+              Add Friend
+            </button>
           ) : (
             <button className="button save-btn">remove Friend</button>
           )}
+          {success && <Alert>Friend added successfully !</Alert>}
+          {error && <Alert severity="error">{error}</Alert>}
         </div>
       </div>
     );

@@ -1,6 +1,11 @@
 import { APIUrls } from '../helper/urls';
 import { getToken } from '../helper/utils';
-import { FETCH_FRIEND_SUCCESSFUL } from './actionsTypes';
+import {
+  ADD_USER_FRIEND,
+  FETCH_FRIEND_SUCCESSFUL,
+  FIREND_ADD_FAIL,
+  FRIEND_ADDED_SUCESSFULLY,
+} from './actionsTypes';
 
 export function fetchUserFriend(userId) {
   return (dispatch) => {
@@ -20,15 +25,30 @@ export function fetchUserFriend(userId) {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         return;
       });
   };
 }
 
-export function fetchUserFriendSuccess(friends) {
+export function fetchUserFriendSuccess(friend) {
   return {
     type: FETCH_FRIEND_SUCCESSFUL,
-    friends,
+    friend,
+  };
+}
+
+
+export function AddFriendSuccess(friendship) {
+  return {
+    type: ADD_USER_FRIEND,
+    friendship,
+  };
+}
+
+export function failToAddFriend(error) {
+  return {
+    type: FIREND_ADD_FAIL,
+    error,
   };
 }
