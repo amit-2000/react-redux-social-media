@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { clearAuthState, login } from '../actions/auth';
 import Alert from '@mui/material/Alert';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 const Login = (props) => {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,20 +12,18 @@ const Login = (props) => {
     props.dispatch(clearAuthState());
   }, []);
 
-
   const handleLogInClick = (e) => {
     e.preventDefault();
-
     if (email.length > 1 && password.length > 1) {
       props.dispatch(login(email, password));
     }
-    console.log(email, password);
+    // console.log(email, password);
   };
 
   //   uncontroller comp : comp data is not manage my react itself.
   // controlled components using state.
   const { inProgress, error, isLoggedin } = props.auth;
-  // console.log(this.props);
+  // console.log(props);
   const { from } = props.location.state || { from: { pathname: '/' } };
   // console.log(from);
   if (isLoggedin) {
@@ -36,6 +34,7 @@ const Login = (props) => {
     <form className="login-form">
       <span className="login-signup-header">Log In</span>
       {error ? <Alert severity="error">{error}</Alert> : ''}
+      <Alert severity="info">prash@gmail.com</Alert>
       <div className="field">
         <input
           type="email"
@@ -66,7 +65,13 @@ const Login = (props) => {
           </button>
         )}
       </div>
-      <div className="field"></div>
+
+      <div className="field">
+        {' '}
+        <Link to="/signup">
+          <button>Register</button>
+        </Link>
+      </div>
     </form>
   );
 };

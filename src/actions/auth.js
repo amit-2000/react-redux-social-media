@@ -50,7 +50,7 @@ export function login(email, password) {
       })
       .catch((err) => {
         dispatch(loginFail(err.message));
-        console.log(err);
+        // console.log(err);
         return;
       });
   };
@@ -96,7 +96,7 @@ export function signup(email, password, confirmPassword, name) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('data', data);
+        // console.log('data', data);
         if (data.success) {
           // do something
 
@@ -177,7 +177,7 @@ export function editUser(name, password, confirm_password, userId) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log('EDIT_PROFILE_DATA', data.data.user);
+        // console.log('EDIT_PROFILE_DATA', data.data.user);
         if (data.success) {
           dispatch(editUserSuccessful(data.data.user));
           if (data.data.token) {

@@ -307,7 +307,7 @@ nav .nav-links ul li:hover {
 
 /* HOME AND FRIENDSLIST COMPONENT */
 .home {
-  padding: 20px 50px;
+  padding: 20px 20px;
   display: flex;
   width: 80%;
   margin: 0 auto;
@@ -317,14 +317,14 @@ nav .nav-links ul li:hover {
 }
 .friends-list {
   background: #fff;
-  margin-left: 50px;
+  margin-left: 20px;
   flex-grow: 0.2;
   height: 50vh;
   box-sizing: border-box;
   margin-top: 20px;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 .friends-list .header {
   border-bottom: 1px solid #e0e0e0;
@@ -405,6 +405,18 @@ nav .nav-links ul li:hover {
   border: none;
   outline: none;
 }
+/* .register-btn{
+  width: 100%;
+  margin-top: 20px;
+  background: #ef7917;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 20px;
+  padding: 9px;
+  border: none;
+  outline: none;
+} */
+
 .field button:hover {
   cursor: pointer;
 }

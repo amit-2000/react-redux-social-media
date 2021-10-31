@@ -13,7 +13,7 @@ const FriendList = (props) => {
         <div className="no-friends">No friends found</div>
       )} */}
       {props.friends.map((friend, idx) => {
-        console.log('In friends map', friend.to_user.name);
+        // console.log('In friends map', friend.to_user.name);
         return <FriendListItem friend={friend.to_user} key={idx} />;
       })}
     </div>

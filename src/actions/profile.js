@@ -19,13 +19,13 @@ export function fetchUserProfile(userId) {
       .then((res) => res.json())
       .then((data) => {
           if (data.success) {
-            console.log('Data', data);
+            // console.log('Data', data);
           dispatch(userProfileSuccess(data.data.user));
           return;
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         dispatch(userProfileFail(err.message));
         return;
       });

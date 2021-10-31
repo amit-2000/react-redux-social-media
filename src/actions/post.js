@@ -14,7 +14,7 @@ export function fetchpost() {
           dispatch(updatePost(data.data.posts));
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           return;
         });
     });
