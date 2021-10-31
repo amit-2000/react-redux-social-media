@@ -5,6 +5,7 @@ import {
   FETCH_FRIEND_SUCCESSFUL,
   FIREND_ADD_FAIL,
   FRIEND_ADDED_SUCESSFULLY,
+  REMOVE_FRIEND,
 } from './actionsTypes';
 
 export function fetchUserFriend(userId) {
@@ -31,13 +32,12 @@ export function fetchUserFriend(userId) {
   };
 }
 
-export function fetchUserFriendSuccess(friend) {
+export function fetchUserFriendSuccess(friends) {
   return {
     type: FETCH_FRIEND_SUCCESSFUL,
-    friend,
+    friends,
   };
 }
-
 
 export function AddFriendSuccess(friendship) {
   return {
@@ -50,5 +50,12 @@ export function failToAddFriend(error) {
   return {
     type: FIREND_ADD_FAIL,
     error,
+  };
+}
+
+export function removeFriendSuccessfully(userId) {
+  return {
+    type: REMOVE_FRIEND,
+    userId,
   };
 }

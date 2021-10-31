@@ -1,81 +1,75 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { clearAuthState, login } from '../actions/auth';
 import Alert from '@mui/material/Alert';
 import { Redirect } from 'react-router';
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-    };
-  }
-  componentWillUnmount() {
-    this.props.dispatch(clearAuthState());
-  }
+const Login = (props) => {
 
-  handleLogInClick = (e) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    props.dispatch(clearAuthState());
+  }, []);
+
+
+  const handleLogInClick = (e) => {
     e.preventDefault();
-    const email = this.state.email;
-    const password = this.state.password;
-    console.log('this.props are', this.props);
+
     if (email.length > 1 && password.length > 1) {
-      this.props.dispatch(login(email, password));
+      props.dispatch(login(email, password));
     }
-    console.log(this.state.email, this.state.password);
+    console.log(email, password);
   };
 
-  render() {
-    //   uncontroller comp : comp data is not manage my react itself.
-    // controlled components using state.
-    const { inProgress, error, isLoggedin } = this.props.auth;
-    console.log(this.props);
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-    console.log(from);
-    if (isLoggedin) {
-      // 'to' can also accept an object !
-      return <Redirect to={from.pathname} />;
-    }
-    return (
-      <form className="login-form">
-        <span className="login-signup-header">Log In</span>
-        {error ? <Alert severity="error">{error}</Alert> : ''}
-        <div className="field">
-          <input
-            type="email"
-            placeholder="Email"
-            required
-            // ref={this.emailInputRef}
-            onChange={(e) => this.setState({ email: e.target.value })}
-          />
-        </div>
-        <div className="field">
-          <input
-            type="password"
-            placeholder="password"
-            required
-            // ref={this.passwordInputRef}
-            // onChange={this.handlePasschange}
-            onChange={(e) => this.setState({ password: e.target.value })}
-          />
-        </div>
-        <div className="field">
-          {inProgress ? (
-            <button onClick={this.handleLogInClick} disabled={inProgress}>
-              Logging in
-            </button>
-          ) : (
-            <button onClick={this.handleLogInClick} disabled={inProgress}>
-              Log in
-            </button>
-          )}
-        </div>
-        <div className="field"></div>
-      </form>
-    );
+  //   uncontroller comp : comp data is not manage my react itself.
+  // controlled components using state.
+  const { inProgress, error, isLoggedin } = props.auth;
+  // console.log(this.props);
+  const { from } = props.location.state || { from: { pathname: '/' } };
+  // console.log(from);
+  if (isLoggedin) {
+    // 'to' can also accept an object !
+    return <Redirect to={from.pathname} />;
   }
-}
+  return (
+    <form className="login-form">
+      <span className="login-signup-header">Log In</span>
+      {error ? <Alert severity="error">{error}</Alert> : ''}
+      <div className="field">
+        <input
+          type="email"
+          placeholder="Email"
+          required
+          // ref={this.emailInputRef}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="field">
+        <input
+          type="password"
+          placeholder="password"
+          required
+          // ref={this.passwordInputRef}
+          // onChange={this.handlePasschange}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <div className="field">
+        {inProgress ? (
+          <button onClick={handleLogInClick} disabled={inProgress}>
+            Logging in
+          </button>
+        ) : (
+          <button onClick={handleLogInClick} disabled={inProgress}>
+            Log in
+          </button>
+        )}
+      </div>
+      <div className="field"></div>
+    </form>
+  );
+};
 
 function mapstateToProps(state) {
   return {

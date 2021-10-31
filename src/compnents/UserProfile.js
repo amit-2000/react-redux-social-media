@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Alert } from '@mui/material';
 import { APIUrls } from '../helper/urls';
 import { getToken } from '../helper/utils';
-import { AddFriendSuccess } from '../actions/friends';
+import { AddFriendSuccess, removeFriendSuccessfully } from '../actions/friends';
 class UserProfile extends Component {
   constructor(props) {
     super();
@@ -56,9 +56,39 @@ class UserProfile extends Component {
     if (data.success) {
       console.log(data);
       this.setState({
-        success: true,
+        success: data.message,
       });
       this.props.dispatch(AddFriendSuccess(data.data.friendship));
+    } else {
+      this.setState({
+        success: null,
+        error: data.message,
+      });
+    }
+  };
+
+  handleRemoveFriend = async () => {
+    const userId = this.props.match.params.userId;
+    const url = APIUrls.removeFriend(userId);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getToken()}`,
+      },
+    };
+
+    const response = await fetch(url, options);
+    const data = await response.json();
+    console.log('Friend remove Action response', data);
+
+    if (data.success) {
+      console.log('if remove success', data);
+      this.setState({
+        success: data.message,
+      });
+      this.props.dispatch(removeFriendSuccessfully(userId));
     } else {
       this.setState({
         success: null,
@@ -104,9 +134,14 @@ class UserProfile extends Component {
               Add Friend
             </button>
           ) : (
-            <button className="button save-btn">remove Friend</button>
+            <button
+              className="button save-btn"
+              onClick={this.handleRemoveFriend}
+            >
+              remove Friend
+            </button>
           )}
-          {success && <Alert>Friend added successfully !</Alert>}
+          {success && <Alert>{success}</Alert>}
           {error && <Alert severity="error">{error}</Alert>}
         </div>
       </div>

@@ -3,17 +3,19 @@ import { connect } from 'react-redux';
 import FriendListItem from './FriendListItem';
 
 const FriendList = (props) => {
-  console.log(props.firends);
+  // console.log(props.firends);
+  // console.log('Friends in friendList', props.friends);
+  
   return (
     <div className="friends-list">
       <div className="header">Friends </div>
-      {props.firends && props.firends.length === 0 && (
+      {/* {props.firends && props.firends.length === 0 && (
         <div className="no-friends">No friends found</div>
-      )}
-      {props.firends &&
-        props.friends.map((friend, idx) => {
-          return <FriendListItem friend={friend.to_user} key={idx} />;
-        })}
+      )} */}
+      {props.friends.map((friend, idx) => {
+        console.log('In friends map', friend.to_user.name);
+        return <FriendListItem friend={friend.to_user} key={idx} />;
+      })}
     </div>
   );
 };

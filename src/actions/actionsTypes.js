@@ -29,6 +29,10 @@ export const FETCH_USER_PROFILE = 'FETCH_USER_PROFILE';
 // Fetch friends  action
 export const FETCH_FRIEND_SUCCESSFUL = 'FETCH_FRIEND_SUCCESSFUL';
 export const FETCH_FRIEND_FAIL = 'FETCH_FRIEND_FAIL';
+// Add friend
 export const ADD_USER_FRIEND = 'ADD_USER_FRIEND';
 export const FRIEND_ADDED_SUCESSFULLY = 'FRIEND_ADDED_SUCESSFULLY';
 export const FIREND_ADD_FAIL = 'FIREND_ADD_FAIL';
+
+// Remove firend
+export const REMOVE_FRIEND = 'REMOVE_FRIEND';
