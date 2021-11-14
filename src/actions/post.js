@@ -7,9 +7,7 @@ export function fetchpost() {
     const url = APIUrls.getPost();
     // console.log(url);
     fetch(url).then((res) => {
-      return res
-        .json()
-        .then((data) => {
+      return res.json().then((data) => {
           // console.log(data);
           dispatch(updatePost(data.data.posts));
         })

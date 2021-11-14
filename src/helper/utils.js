@@ -1,4 +1,4 @@
-// function to convert url in url encoded form
+// function to convert url in urlencoded form
 export const getFormBody = (params) => {
   let formBody = [];
   for (let property in params) {

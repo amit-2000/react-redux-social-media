@@ -81,7 +81,7 @@ export function signup(email, password, confirmPassword, name) {
   // console.log('hellooooo');
 
   return (dispatch) => {
-    const url = APIUrls.signUp();
+    const url = APIUrls.signUp(); // i have api.
     fetch(url, {
       method: 'POST',
       headers: {
